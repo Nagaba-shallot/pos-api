@@ -25,6 +25,7 @@ def update_sale(
 ):
     return sale_services.update_sale(db, sale_id, data)
 
-@router.delete("/{sale_id}", response_model=SaleRead)
+@router.delete("/{sale_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_sale(sale_id: int, db: Session = Depends(get_db)):
-    return sale_services.delete_sale(db, sale_id)
+    sale_services.delete_sale(db, sale_id)
+    return None

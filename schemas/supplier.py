@@ -19,7 +19,7 @@ class SupplierUpdate(BaseModel):
 class SupplierRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
-    id: int
+    supplier_id: int
     company_name: str
     contact_person: str
     contact_email: str

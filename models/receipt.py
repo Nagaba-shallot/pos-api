@@ -11,5 +11,6 @@ class Receipt(Base):
     receipt_number = Column(String(100), unique=True, nullable=False)
     issued_at = Column(DateTime, default=func.now())
 
+    receipt_text = Column(String, nullable=True) 
     
     sales = relationship("Sales", back_populates="receipts")

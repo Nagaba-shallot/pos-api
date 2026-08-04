@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from repositories import category_repository
+from repositories.category_repository import category_repository
 
 def list_categories(db: Session):
     return category_repository.get_all(db)

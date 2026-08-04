@@ -36,3 +36,5 @@ get_all = _repository_instance.get_all
 create = _repository_instance.create
 update = _repository_instance.update
 delete = _repository_instance.delete
+
+category_repository = CategoryRepository()

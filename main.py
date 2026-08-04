@@ -11,6 +11,8 @@ from models.sale import Sales
 from models.supplier import Supplier
 from models.user import User
 
+#Base.metadata.drop_all(bind=engine)
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="POS API", version="1.0.0")

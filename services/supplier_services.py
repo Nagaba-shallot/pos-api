@@ -1,5 +1,5 @@
 from fastapi import HTTPException, status
-from repositories import supplier_repository
+from repositories.supplier_repository import supplier_repository
 from schemas.supplier import SupplierCreate, SupplierUpdate
 from sqlalchemy.orm import Session
 
@@ -7,7 +7,7 @@ def get_supplier(db:Session, id:int):
     supplier = supplier_repository.get(db, id)
     if not supplier:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, details = "Supplier not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="Supplier not found"
         )
     return supplier
 
@@ -15,7 +15,8 @@ def list_suppliers(db:Session):
     return supplier_repository.get_all(db)
 
 def create_supplier(db: Session, data: SupplierCreate):
-    return supplier_repository.create(db, data.model_dump)
+    return supplier_repository.create(db, data.model_dump())
+   
 
 def update_supplier(db: Session, id: int, data: SupplierUpdate):
     supplier = get_supplier(db, id)

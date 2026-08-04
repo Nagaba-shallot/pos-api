@@ -1,6 +1,6 @@
 from datetime import datetime
 from decimal import Decimal
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 class ReceiptCreate(BaseModel):
     sale_id: int
@@ -17,8 +17,8 @@ class ReceiptUpdate(BaseModel):
 class ReceiptRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
-    id: int
+    receipt_id: int
     sale_id: int
     receipt_number: str
     receipt_text: str | None = None
-    printed_time: datetime
+    printed_time: datetime = Field(validation_alias="issued_at")

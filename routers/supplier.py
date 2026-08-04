@@ -25,6 +25,7 @@ def update_supplier(
 ):
     return supplier_services.update_supplier(db, supplier_id, data)
 
-@router.delete("/{supplier_id}", response_model=SupplierRead)
+@router.delete("/{supplier_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_supplier(supplier_id: int, db: Session = Depends(get_db)):
-    return supplier_services.delete_supplier(db, supplier_id)
+    supplier_services.delete_supplier(db, supplier_id)
+    return None

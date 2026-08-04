@@ -25,6 +25,7 @@ def update_payment(
 ):
     return payment_services.update_payment(db, payment_id, data)
 
-@router.delete("/{payment_id}", response_model=PaymentRead)
+@router.delete("/{payment_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_payment(payment_id: int, db: Session = Depends(get_db)):
-    return payment_services.delete_payment(db, payment_id)
+    payment_services.delete_payment(db, payment_id)
+    return None

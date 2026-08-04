@@ -1,5 +1,5 @@
 from fastapi import HTTPException, status
-from repositories import payment_repository
+from repositories.payment_repository import payment_repository
 from schemas.payment import PaymentCreate, PaymentUpdate
 from sqlalchemy.orm import Session
 
@@ -15,7 +15,7 @@ def list_payments(db:Session):
     return payment_repository.get_all(db)
 
 def create_payment(db: Session, data: PaymentCreate):
-    return payment_repository.create(db, data.model_dump)   
+    return payment_repository.create(db, data.model_dump())   
 
 def update_payment(db: Session, id: int, data: PaymentUpdate):
     payment = get_payment(db, id)

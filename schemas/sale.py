@@ -21,12 +21,10 @@ class SaleUpdate(BaseModel):
 class SaleRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
-    id: int
+    sale_id: int
     customer_id: int
     user_id: int
     sale_date: datetime
     total_amount: Decimal
     tax_amount: Decimal
     discount_amount: Decimal
-    created_at: datetime
-    updated_at: datetime

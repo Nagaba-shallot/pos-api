@@ -17,7 +17,7 @@ class PaymentUpdate(BaseModel):
 class PaymentRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
-    id: int
+    payment_id: int
     sale_id: int
     payment_method: str
     payment_amount: Decimal

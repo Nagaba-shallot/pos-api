@@ -25,8 +25,7 @@ def update_product(
 ):
     return product_services.create_product(db, data)
 
-@router.delete("/{product_id}", response_model=ProductRead)
-def delete_product(
-    delete_id:int, data:ProductUpdate, db: Session = Depends(get_db)
-):
-    return product_services.delete_product(db, data)
+@router.delete("/{product_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_product(product_id: int, db: Session = Depends(get_db)): # FIXED: Matched path param name, removed body
+    product_services.delete_product(db, product_id)
+    return None

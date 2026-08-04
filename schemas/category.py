@@ -13,7 +13,7 @@ class CategoryUpdate(BaseModel):
 class CategoryRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
-    id: int
+    category_id: int
     name: str
     category_description: str | None = None
     created_at: datetime

@@ -4,10 +4,11 @@ from sqlalchemy import (
     ForeignKey,
     Integer,
     Numeric,
-    String
+    String,
+    DateTime
 )
+from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
-
 
 class Product(Base):
     __tablename__ = "products"
@@ -21,7 +22,9 @@ class Product(Base):
     category_id = Column(Integer, ForeignKey("categories.category_id"), nullable=False)
     supplier_id = Column(Integer, ForeignKey("suppliers.supplier_id"), nullable=True)
 
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
     category = relationship("Category", back_populates="products")
     supplier = relationship("Supplier", back_populates="products")
-    sale_items = relationship("SaleItem", back_populates="product") 
-
+    sale_items = relationship("SaleItem", back_populates="product")

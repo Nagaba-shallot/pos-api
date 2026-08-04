@@ -25,6 +25,7 @@ def update_customer(
 ):
     return customer_services.update_customer(db, customer_id, data)
 
-@router.delete("/{customer_id}", response_model=CustomerRead)
+@router.delete("/{customer_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_customer(customer_id: int, db: Session = Depends(get_db)):
-    return customer_services.delete_customer(db, customer_id)
+    customer_services.delete_customer(db, customer_id)
+    return None

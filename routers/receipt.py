@@ -25,6 +25,7 @@ def update_receipt(
 ):
     return receipt_services.update_receipt(db, receipt_id, data)
 
-@router.delete("/{receipt_id}", response_model=ReceiptRead)
+@router.delete("/{receipt_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_receipt(receipt_id: int, db: Session = Depends(get_db)):
-    return receipt_services.delete_receipt(db, receipt_id)
+    receipt_services.delete_receipt(db, receipt_id)
+    return None
