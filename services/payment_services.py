@@ -7,7 +7,7 @@ def get_payment(db:Session, id:int):
     payment = payment_repository.get(db, id)
     if not payment:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, details = "Payment not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail = "Payment not found"
         )
     return payment
 

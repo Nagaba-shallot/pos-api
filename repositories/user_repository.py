@@ -1,9 +1,20 @@
 from models.user import User
 from sqlalchemy.orm import Session
 
+
 class UserRepository:
     def __init__(self):
         self.model = User
+
+    def get_by_username(self, db:Session, username:str):
+        return db.query(User).filter(User.username == username).first()
+
+    def get_by_email(self, db: Session, email: str):
+        return db.query(self.model).filter(self.model.email == email).first()
+
+
+    def get_by_id(self, db: Session, id: int):
+        return db.get(self.model, id)
 
     def get(self, db:Session, id:int):
         return db.get(User, id)

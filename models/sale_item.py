@@ -14,5 +14,5 @@ class SaleItem(Base):
     subtotal = Column(Numeric(10, 2), nullable=False)
 
     
-    sales = relationship("Sales", back_populates="sale_items")
+    sale = relationship("Sales", back_populates="sale_items")
     product = relationship("Product", back_populates="sale_items")

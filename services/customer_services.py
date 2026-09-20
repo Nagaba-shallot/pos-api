@@ -7,7 +7,7 @@ def get_customer(db:Session, id:int):
     customer = customer_repository.get(db, id)
     if not customer:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, details = "Customer not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail = "Customer not found"
         )
     return customer
 

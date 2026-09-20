@@ -11,7 +11,7 @@ class Customer(Base):
     first_name = Column(String(100), nullable=False)
     last_name = Column(String(100), nullable=False)
     email = Column(String(100), unique=True, nullable=False)
-    phone_number = Column(String(20), unique=True, nullable=False)
+    phone_number = Column(String(20), unique=True, nullable=True)
     address = Column(String(255), nullable=True) 
 
     created_at = Column(DateTime, default=func.now())

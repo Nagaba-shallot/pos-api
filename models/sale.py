@@ -16,6 +16,6 @@ class Sales(Base):
     
     customer = relationship("Customer", back_populates="sales")
     user = relationship("User", back_populates="sales")
-    sale_items = relationship("SaleItem", back_populates="sales")
+    sale_items = relationship("SaleItem", back_populates="sale")
     payments = relationship("Payment", back_populates="sale")
     receipts = relationship("Receipt", back_populates="sales")

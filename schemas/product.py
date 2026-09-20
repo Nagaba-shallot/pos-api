@@ -24,5 +24,12 @@ class ProductUpdate(BaseModel):
 class ProductRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
-    product_id:int
+    product_id: int
+    name:str
+    stock_keeping_unit: str
+    price: Decimal
+    quantity_in_stock: int
+    reorder_level: int
+    category_id: int
+    supplier_id: int | None = None
     created_at: datetime

@@ -4,8 +4,9 @@ from sqlalchemy.orm import Session
 from database import get_db
 from schemas.product import ProductUpdate, ProductCreate, ProductRead
 from services import product_services
+from dependencies import get_current_user
 
-router = APIRouter(prefix="/products", tags=["products"])
+router = APIRouter(prefix="/products", tags=["products"], dependencies=[Depends(get_current_user)])
 
 @router.get("/", response_model=list[ProductRead])
 def list_product(db: Session = Depends(get_db)):
@@ -23,9 +24,9 @@ def create_product(data: ProductCreate, db: Session = Depends(get_db)):
 def update_product(
     product_id:int, data:ProductUpdate, db: Session = Depends(get_db)
 ):
-    return product_services.create_product(db, data)
+    return product_services.update_product(db, product_id, data)
 
 @router.delete("/{product_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_product(product_id: int, db: Session = Depends(get_db)): # FIXED: Matched path param name, removed body
+def delete_product(product_id: int, db: Session = Depends(get_db)): 
     product_services.delete_product(db, product_id)
     return None

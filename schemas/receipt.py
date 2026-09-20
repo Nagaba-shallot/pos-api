@@ -4,7 +4,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 class ReceiptCreate(BaseModel):
     sale_id: int
-    receipt_number: str
+    receipt_number: str | None = None
     receipt_text: str | None = None
     printed_time: datetime
 

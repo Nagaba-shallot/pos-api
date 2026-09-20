@@ -7,7 +7,7 @@ def get_product(db:Session, id:int):
     product = product_repository.get(db, id)
     if not product:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, details = "Product not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail = "Product not found"
         )
     return product
 

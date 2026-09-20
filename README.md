@@ -31,26 +31,45 @@ The API manages the following interconnected domain models:
 
 ### 1. Clone & Initialize Environment
 
-`git clone https://github.com/Nagaba-shallot/pos-api
-cd pos
-uv venv env
+```bash
+git clone https://github.com/Nagaba-shallot/pos-api
+cd pos-api
+python -m venv env
 source env/bin/activate
-uv pip install -r requirements.txt`
-
+pip install -r requirements.txt
+```
 
 ### 2. Configure Database Context
-Ensure you have a live **PostgreSQL** instance running locally or remotely, and update your configuration string inside `app/database.py`:
-`SQLALCHEMY_DATABASE_URL = "postgresql://username:password@localhost:5432/pos_db"`
+Ensure you have a live **PostgreSQL** instance running locally or remotely. By default the app connects to `postgresql://postgres:postgres@localhost:5432/pos_db`. To use a different database, set the `DATABASE_URL` environment variable (or edit the default in `database.py`):
+
+```bash
+export DATABASE_URL="postgresql://username:password@localhost:5432/pos_db"
+```
 
 ### 3. Launch Development Reloader
-`
-cd app
+```bash
 uvicorn main:app --reload
-`
+```
 The server will bind to `http://127.0.0.1:8000`.
 
 
-## Testing the API
+## Running the Tests
+
+The automated test suite uses **pytest** and an in-memory **SQLite** database, so it never touches your PostgreSQL development database and needs no database server.
+
+```bash
+pip install -r requirements-dev.txt   # runtime dependencies + pytest + httpx
+pytest                                # run the whole suite
+```
+
+Useful variations: `pytest app/tests/test_product.py` (one file), `pytest -k "duplicate"` (by name), `pytest -v` (verbose output).
+
+The tests live in `app/tests/`, one file per entity (`test_product.py`, `test_sale.py`, ...) plus authentication, database-isolation and end-to-end checkout tests. Shared fixtures and record factories are in `tests/conftest.py`.
+
+The same suite runs automatically on GitHub Actions (`.github/workflows/ci.yml`) for every push and pull request; the build fails if any test fails.
+
+
+## Trying the API by Hand
 Open your browser and navigate to the integrated interactive Open-API dashboard, Swagga UI:
 `http://127.0.0.1:8000/docs#/`
 
